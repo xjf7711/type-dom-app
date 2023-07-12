@@ -1,8 +1,6 @@
-import { debounce, debounceTime, switchMap, fromEvent, map, filter, Observable, Subscription, merge } from 'rxjs';
-import './styles/index.scss';
+import { fromEvent } from 'rxjs';
 import { AppRoot } from './app-root';
-// 在页面中调用时
-
+import './styles/index.scss';
 fromEvent(document, 'DOMContentLoaded').subscribe(e => {
   // console.log('document DOMContentLoaded, e is ', e);
   const el = document.querySelector('#app-ref') as HTMLElement;
