@@ -1,6 +1,6 @@
 {
   "name": "type-dom-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "type dom app . ",
   "main": "src/main.ts",
   "scripts": {
@@ -75,7 +75,7 @@
     "type-dom-parser": "^0.0.3",
     "type-dom-svgs": "^0.0.3",
     "type-dom-ui": "^0.0.3",
-    "type-dom.ts": "^0.0.19"
+    "type-dom.ts": "^0.0.24"
   },
   "typeCoverage": {
     "atLeast": 99,
