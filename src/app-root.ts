@@ -20,10 +20,7 @@ export class AppRoot extends TypeRoot {
       TypeClass: Division,
       childNodes: [
         {
-          TypeClass: TextNode,
-          config: {
-            title: 'hello world !'
-          }
+          nodeValue: 'Hello world ! '
         }
       ]
     });
