@@ -20,7 +20,7 @@ export class AppRoot extends TypeRoot {
       TypeClass: Division,
       childNodes: [
         {
-          nodeValue: 'Hello world ! '
+          nodeValue: 'Hello world ! ' // 文本节点
         }
       ]
     });
