@@ -1,4 +1,4 @@
-import { Division, TextNode, TypeRoot } from 'type-dom.ts';
+import { Division, TypeRoot } from 'type-dom.ts';
 /**
  * 应用类，挂载全局属性和方法。
  * 根节点，继承 TypeRoot;
