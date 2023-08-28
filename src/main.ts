@@ -7,5 +7,6 @@ fromEvent(document, 'DOMContentLoaded').subscribe(e => {
   console.log('el is ', el);
   if (el) {
     const app = new AppRoot(el);
+    app.render();
   }
 });
