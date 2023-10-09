@@ -6,16 +6,15 @@ export function deepClone<T>(data: T): T {
   if (typeof data !== 'object' || typeof data === 'function' || data === null) {
     return data;
   }
-  let item: unknown;
+  let item: T;
   if (Array.isArray(data)) {
-    item = [];
-  }
-  if (!Array.isArray(data)) {
-    item = {};
+    item = [] as T;
+  } else {
+    item = {} as T;
   }
   for (const i in data) {
     if (Object.prototype.hasOwnProperty.call(data, i)) {
-      item[i] = deepClone(data[i]);
+      (item as T)[i] = deepClone(data[i]);
     }
   }
   return item;
