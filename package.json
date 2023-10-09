@@ -8,6 +8,7 @@
     "build": "webpack --mode=production --config ./build/webpack.config.js",
     "lib": "webpack --mode=none --config ./build/webpack.lib.config.js",
     "js": "tsc",
+    "postversion": "rimraf dist && npm run build && cp README.md package.json js && cd js && npm publish",
     "test": "jest",
     "lint": "eslint src",
     "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix -o eslint_log.log",
@@ -32,8 +33,8 @@
     "@babel/preset-react": "^7.22.5",
     "@types/file-saver": "^2.0.3",
     "@types/jest": "^29.5.2",
-    "@typescript-eslint/eslint-plugin": "^5.59.11",
-    "@typescript-eslint/parser": "^5.59.11",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
@@ -53,13 +54,14 @@
     "postcss": "^8.4.24",
     "postcss-loader": "^7.3.3",
     "precss": "^4.0.0",
+    "rimraf": "^5.0.5",
     "sass": "^1.63.3",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",
-    "ts-jest": "^28.0.8",
+    "ts-jest": "^29.1.1",
     "ts-loader": "^9.4.3",
-    "typedoc": "^0.24.8",
+    "typedoc": "^0.25.2",
     "typescript": "^5.1.3",
     "typescript-coverage-report": "^0.8.0",
     "url-loader": "^4.1.1",
@@ -72,9 +74,9 @@
   "dependencies": {
     "axios": "^1.4.0",
     "rxjs": "^7.8.1",
-    "type-dom-svgs": "^0.0.6",
-    "type-dom-ui": "^0.0.6",
-    "type-dom.ts": "^0.1.26"
+    "type-dom-svgs": "*",
+    "type-dom-ui": "*",
+    "type-dom.ts": "*"
   },
   "typeCoverage": {
     "atLeast": 99,
@@ -99,5 +101,15 @@
     "showRelativePath": true,
     "historyFile": "typecoverage.json",
     "noDetailWhenFailed": true
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/dist",
+          "{projectRoot}/public/dist"
+        ]
+      }
+    }
   }
 }

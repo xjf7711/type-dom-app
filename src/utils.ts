@@ -6,7 +6,7 @@ export function deepClone<T>(data: T): T {
   if (typeof data !== 'object' || typeof data === 'function' || data === null) {
     return data;
   }
-  let item: any;
+  let item: unknown;
   if (Array.isArray(data)) {
     item = [];
   }
