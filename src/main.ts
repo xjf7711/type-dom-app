@@ -6,7 +6,7 @@ fromEvent(document, 'DOMContentLoaded').subscribe(() => {
   const el = document.querySelector('#app-ref') as HTMLElement;
   console.log('el is ', el);
   if (el) {
-    const app = new AppRoot(el);
+    const app = new AppRoot({ el });
     app.render();
   }
 });

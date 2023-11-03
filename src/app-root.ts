@@ -1,4 +1,4 @@
-import { Br, Division, TypeRoot, XElement } from 'type-dom.ts';
+import { Br, Division, TypeRoot, XElement, ITypeRootOption } from 'type-dom.ts';
 /**
  * 应用类，挂载全局属性和方法。
  * 根节点，继承 TypeRoot;
@@ -6,16 +6,15 @@ import { Br, Division, TypeRoot, XElement } from 'type-dom.ts';
  */
 export class AppRoot extends TypeRoot {
   className: 'AppRoot';
-  static el: HTMLElement;
-
-  constructor(editorEl: HTMLElement) {
-    super(editorEl);
+  static el: HTMLElement | string;
+  constructor(option: ITypeRootOption) {
+    super(option);
     this.className = 'AppRoot';
     this.addStyleObj({
       padding: '30px',
       border: '20px solid #dddddd'
     });
-    AppRoot.el = editorEl;
+    AppRoot.el = option.el;
     this.events = [];
     this.createItems(this, [ // 添加子节点
       {
@@ -36,45 +35,65 @@ export class AppRoot extends TypeRoot {
           },
         ]
       },
-      {
-        template: `<div data-name='second-item' style='padding: 20px;color: #00F; background: #ddd'>
-          title is   {{title}}
-            <input :value='user.name' @input="onInput" @change="onChange"/>
-            name: {{ user.name }} age is {{ user.age }}
-            </div>`,
-        data: {
-          user: {
-            name: 'helen',
-            age: 27,
-          },
-          title: 'I am ok. ',
-          input: 'abc'
-        },
-        methods: {
-          onInput(evt: Event, bindItem: XElement) {
-            console.log('onInput evt is ', evt);
-            console.log('onInput bindItem is ', bindItem);
-            const domValue = (bindItem.dom as HTMLInputElement).value;
-            bindItem.setAttrObj({
-              value: domValue
-            });
-            bindItem.tempItem.data.user.name = domValue;
-            bindItem.nextSibling && bindItem.nextSibling.render();
-          },
-          onChange(evt: Event, bindItem: XElement) {
-            console.log('onChange evt is ', evt);
-            console.log('onChange bindItem is ', bindItem);
-          }
-        }
-      },
+      // {
+      //   template: `<div data-name='second-item' style='padding: 20px;color: #00F; background: #ddd'>
+      //     title is   {{title}}
+      //       <input :value='user.name' @input="onInput" @change="onChange"/>
+      //       name: {{ user.name }} age is {{ user.age }}
+      //       </div>`,
+      //   data: {
+      //     user: {
+      //       name: 'helen',
+      //       age: 27,
+      //     },
+      //     title: 'I am ok. ',
+      //     input: 'abc'
+      //   },
+      //   methods: {
+      //     onInput(evt: Event, bindItem: XElement) {
+      //       console.log('onInput evt is ', evt);
+      //       console.log('onInput bindItem is ', bindItem);
+      //       const domValue = (bindItem.dom as HTMLInputElement).value;
+      //       bindItem.setAttrObj({
+      //         value: domValue
+      //       });
+      //       bindItem.tempItem.data.user.name = domValue;
+      //       bindItem.nextSibling && bindItem.nextSibling.render();
+      //     },
+      //     onChange(evt: Event, bindItem: XElement) {
+      //       console.log('onChange evt is ', evt);
+      //       console.log('onChange bindItem is ', bindItem);
+      //     }
+      //   }
+      // },
       {
         TypeClass: Br // 换行
       }
     ]);
-    this.createItem<XElement>(this,
-      {
-        template: `<p data-name='third-item' style='border: 1px solid #FF0;'> paragraph </p>`
-      });
+    // this.createItem<XElement>(this, {
+    //   template: `<p data-name='third-item' style='border: 1px solid #FF0;'> paragraph </p>`
+    // });
+    const xElement = new XElement({
+      parent: this,
+      template: '<div @click="onclick"> name: {{name}}</div>',
+      data: {
+        name: 'x-element'
+      },
+      methods: {
+        onclick() {
+          console.log('onclick . ');
+        }
+      },
+      // childNodes: [
+      //   {
+      //     template: 'child 1 . '
+      //   },
+      //   {
+      //     template: 'child 2 . '
+      //   }
+      // ]
+    })
+    // this.addChild(xElement);
     // this.render();
   }
 }
