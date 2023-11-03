@@ -6,13 +6,14 @@
   "scripts": {
     "serve": "webpack-dev-server --mode=development --config build/webpack.config.js",
     "build": "webpack --mode=production --config build/webpack.config.js",
-    "postversion": "node_modules/.bin/rimraf dist && npm run build && cp README.md package.json js && cd js && npm publish",
+    "postversion": "rimraf dist && npm run build && cp README.md package.json dist && cd dist && npm publish",
     "test": "jest",
     "lint": "eslint src",
     "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix -o eslint_log.log",
     "uml": "tsuml2 --glob type-dom/type-node/web-element/*.ts ",
     "docs": "typedoc --entryPointStrategy expand src",
     "coverage": "typescript-coverage-report",
+    "git-push": "git add . && git commit -m 'edit' && git push origin main",
     "git-pull": "git pull"
   },
   "keywords": [
@@ -97,15 +98,5 @@
     "showRelativePath": true,
     "historyFile": "typecoverage.json",
     "noDetailWhenFailed": true
-  },
-  "nx": {
-    "targets": {
-      "build": {
-        "outputs": [
-          "{projectRoot}/dist",
-          "{projectRoot}/public/dist"
-        ]
-      }
-    }
   }
 }
